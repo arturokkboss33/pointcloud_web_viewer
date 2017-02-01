@@ -22,10 +22,10 @@ define("MESHFACESFILE", "mesh_faces.csv");
 define("ENVIRONMENT", "production");
 
 // The development url
-define("DEVELURL", "http://localhost/2016-watertight-meshes-v01/");
+define("DEVELURL", "http://localhost/2017-underwater-stereo-dataset-v01/");
 
 // The production url
-define("PRODURL", "http://robotics.jacobs-university.de/datasets/2016-watertight-meshes-v01/");
+define("PRODURL", "http://robotics.jacobs-university.de/datasets/2017-underwater-stereo-dataset-v01/");
 
 
 
