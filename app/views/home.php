@@ -40,25 +40,14 @@
   <div class="row">
 
     <div class="col-lg-8">
-      <h1 style="font-size:38px;">Jacobs Robotics Watertight Meshes Dataset</h1><br />
-      <p class="lead">Point clouds, mesh representations and Gazebo models of everyday objects.</p>
+      <h1 style="font-size:38px;">CADDY Underwater Stereo Images Dataset</h1><br />
+      <p class="lead">Stereo images and generated point clouds of divers' hand gestures and poses in different underwater scenarios.</p>
 
       <p class="justify">
       <br>
-      The object point clouds available on this website were created from low-cost RGBD sensor data without user interaction, see our first <a href="http://dx.doi.org/10.1016/j.robot.2015.01.005" target="_blank">publication</a>:
-      <p class="refhighlightbox"><b>Razvan-George Mihalyi, Kaustubh Pathak, Narunas Vaskevicius, Tobias Fromm and Andreas Birk</b> <br> "Robust 3D Object Modeling with a Low-Cost RGBD-Sensor and AR-Markers<br>for Applications with Untrained End-Users" <br> In <i>Robotics and Autonomous Systems</i>, April 2015</p>
+	The images available were collected with a Bumblebee XB3 FireWire Stereo Vision System during different research trials carried out within the  <a href="http://caddy-fp7.eu/" target="_blank">EU-FP7 CADDY</a> project (Cognitive Autonomous Diving Buddy). With the creation of this dataset, research in two specific areas was made: diver <b>hand gesture recognition</b> and <b>body pose estimation</b>.   
       <br>
-      From these point clouds, watertight mesh representations were generated as described in our second <a href="https://arxiv.org/abs/1603.00663" target="_blank">publication</a>:</p>
-      <p class="refhighlightbox"><b>Tobias Fromm, Christian A. Mueller and Andreas Birk</b> <br> "Unsupervised Watertight Mesh Generation for Physics Simulation Applications Using Growing Neural Gas<br>on Noisy Free-Form Object Models" <br> In <i>arXiv.org</i>, https://arxiv.org/abs/1603.00663, September 2016</p>
-      <br>
-      <p class="justify">Each object's point cloud and mesh can be viewed live. We provide zipped .bag files for the objects which were used in our modeling approach as well as .zip files containing:
 
-      <ul class="text" id="introul">
-          <li>PCD point cloud</li>
-          <li>PLY mesh</li>
-          <li>PNG preview image</li>
-          <li>Gazebo model folder</li>
-      </ul>
       </p>  
     </div>
     
@@ -156,3 +145,4 @@
   <?php
   include('footer.php');
   ?>
+
