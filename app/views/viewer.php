@@ -365,7 +365,7 @@ else {
         </p>
       </div>
       <div id="controls-iframe" style="position:absolute; top:5px; left:5px; z-index:999999; display:none;">
-        <a style="font-size:11px;" href="http://www.robotics.jacobs-university.de/datasets/2016-watertight-meshes-v01/view/<?php echo $pcFolder ?>" target="_blank">view on robotics.jacobs-university.de</a>
+        <a style="font-size:11px;" href="http://www.robotics.jacobs-university.de/datasets/2017-underwater-stereo-dataset-v01/view/<?php echo $pcFolder ?>" target="_blank">view on robotics.jacobs-university.de</a>
       </div>
 
       <div id="progressbar-container" class="progress progress-striped" style="position:absolute; z-index:999999; width:400px; top:230px;">
