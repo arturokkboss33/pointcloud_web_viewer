@@ -122,7 +122,7 @@
                 <h4><?php echo $title ?></h4>
                 <div style="text-align:left; padding:5px;">
                   <h5><?php echo $desc ?></h5>
-                  <?php if (file_exists($zipFile)) { ?>Stereo images: <?php echo $zipSize ?> MB<?php } ?>
+                  <?php if (file_exists($zipFile)) { ?>Stereo images: <?php echo $zipSize ?> MB<?php } ?><br>
 		  <?php if (file_exists($bagFile)) { ?>, Bagfile: <?php echo $bagSize ?> GB<?php } ?>
                 </div>
                 <p><a class="btn btn-sm btn-primary" href="view/<?php echo $file ?>">PC sample</a>
