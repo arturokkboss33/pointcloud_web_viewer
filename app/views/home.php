@@ -122,12 +122,12 @@
                 <h4><?php echo $title ?></h4>
                 <div style="text-align:left; padding:5px;">
                   <h5><?php echo $desc ?></h5>
-                  Point Cloud (view): <?php echo $pcSize ?> MB<br>
-                  <?php if (file_exists($zipFile)) { ?>Model: <?php echo $zipSize ?> MB<?php } ?><?php if (file_exists($bagFile)) { ?>, Bagfile: <?php echo $bagSize ?> GB<?php } ?>
+                  <?php if (file_exists($zipFile)) { ?>Stereo images: <?php echo $zipSize ?> MB<?php } ?>
+		  <?php if (file_exists($bagFile)) { ?>, Bagfile: <?php echo $bagSize ?> GB<?php } ?>
                 </div>
-                <p><a class="btn btn-sm btn-primary" href="view/<?php echo $file ?>">View</a>
+                <p><a class="btn btn-sm btn-primary" href="view/<?php echo $file ?>">PC sample</a>
                 <?php if (file_exists($zipFile)) { ?>
-                <a class="btn btn-sm btn-success" href="<?php echo $zipFile ?>">Model</a>
+                <a class="btn btn-sm btn-success" href="<?php echo $zipFile ?>">Stereo imgs</a>
 				<?php } ?>
                 <?php if (file_exists($bagFile)) { ?>
 				<a class="btn btn-sm btn-success" href="<?php echo $bagFile ?>">Bagfile</a></p>
