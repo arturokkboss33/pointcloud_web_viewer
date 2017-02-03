@@ -130,7 +130,7 @@
                 <a class="btn btn-sm btn-success" href="<?php echo $zipFile ?>">Stereo imgs</a>
 				<?php } ?>
                 <?php if (file_exists($bagFile)) { ?>
-				<a class="btn btn-sm btn-success" href="<?php echo $bagFile ?>">Bagfile</a></p>
+		<a class="btn btn-sm btn-success" href="<?php echo $bagFile ?>">Bagfile</a></p>
 				<?php } ?>
               </div>
               <img class="img-responsive" src="<?php echo $imgFile ?>">
