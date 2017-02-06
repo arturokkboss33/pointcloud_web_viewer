@@ -45,7 +45,9 @@
 
       <p class="justify">
       <br>
-	The images available were collected with a Bumblebee XB3 FireWire Stereo Vision System during different research trials carried out within the  <a href="http://caddy-fp7.eu/" target="_blank">EU-FP7 CADDY</a> project (Cognitive Autonomous Diving Buddy). With the creation of this dataset, research in two specific areas was made: diver <b>hand gesture recognition</b> and <b>body pose estimation</b>.   
+	The images available were collected with a Bumblebee XB3 FireWire Stereo Vision System during different research trials carried out within the  <a href="http://caddy-fp7.eu/" target="_blank">EU-FP7 CADDY</a> project (Cognitive Autonomous Diving Buddy). With the creation of this dataset, research in two specific areas was made: diver <b>body pose estimation</b> and <b>hand gesture recognition</b>.
+     <p class="refhighlightbox"><b>Diver pose estimation</b> <br> s<br>for Applications with Untrained End-Users" <br> In <i>Robotics and Autonomous Systems</i>, April 2015</p>
+   
       <br>
 
       </p>  
