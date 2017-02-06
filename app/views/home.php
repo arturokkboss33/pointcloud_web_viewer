@@ -125,12 +125,12 @@
                   <?php if (file_exists($zipFile)) { ?>Stereo images: <?php echo $zipSize ?> MB<?php } ?><br>
 		  <?php if (file_exists($bagFile)) { ?>Bagfile: <?php echo $bagSize ?> GB<?php } ?>
                 </div>
-                <p><a class="btn btn-sm btn-primary" href="view/<?php echo $file ?>">PC sample</a>
+                <p><a class="btn btn-sm btn-primary" href="view/<?php echo $file ?>">PC</a>
                 <?php if (file_exists($zipFile)) { ?>
-                <a class="btn btn-sm btn-success" href="<?php echo $zipFile ?>">Stereo</a>
+                <a class="btn btn-sm btn-success" href="<?php echo $zipFile ?>">St</a>
 				<?php } ?>
                 <?php if (file_exists($bagFile)) { ?>
-		<a class="btn btn-sm btn-success" href="<?php echo $bagFile ?>">Bagfile</a></p>
+		<a class="btn btn-sm btn-success" href="<?php echo $bagFile ?>">Bag</a></p>
 				<?php } ?>
               </div>
               <img class="img-responsive" src="<?php echo $imgFile ?>">
