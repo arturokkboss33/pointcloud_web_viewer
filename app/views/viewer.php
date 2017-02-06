@@ -4,13 +4,11 @@
 $valid = true;
 $pcDataFolder = DATAFOLDER . '/' . $pcFolder;
 $pcFile = $pcDataFolder . '/' . PCFILE;
-$meshVerticesFile = $pcDataFolder . '/' . MESHVERTICESFILE;
-$meshFacesFile = $pcDataFolder . '/' . MESHFACESFILE;
 $infoFile = $pcDataFolder . '/' . PCINFO;
 if (!is_dir($pcDataFolder)) {
   $valid = false;
 }
-if (!file_exists($pcFile) || !file_exists($meshVerticesFile) || !file_exists($meshFacesFile) || !file_exists($infoFile)) {
+if (!file_exists($pcFile) || !file_exists($infoFile)) {
   $valid = false;
 }
 if (!$valid) {
@@ -28,18 +26,13 @@ while(!feof($handle)){
 fclose($handle);
 $lineCountCloud--;
 
-$lineCountMesh = 0;
 
 // Pointcloud url
 if (ENVIRONMENT === 'production') {
   $pcUrl = PRODURL . $pcFile;
-  $meshVerticesUrl = PRODURL . $meshVerticesFile;
-  $meshFacesUrl = PRODURL . $meshFacesFile;
 }
 else {
   $pcUrl = DEVELURL . $pcFile;
-  $meshVerticesUrl = DEVELURL . $meshVerticesFile;
-  $meshFacesUrl = DEVELURL . $meshFacesFile;
 }
 
 ?>
@@ -120,9 +113,9 @@ else {
 
         // Setup controls
         var controls = new THREE.TrackballControls(camera);
-        controls.rotateSpeed = 1.0;
+        controls.rotateSpeed = 2.0;
         controls.zoomSpeed = 10.2;
-        controls.panSpeed = 0.8;
+        controls.panSpeed = 1.6;
         controls.noZoom = false;
         controls.noPan = false;
         controls.staticMoving = true;
@@ -137,57 +130,17 @@ else {
         }
 
         // Init the geometry
-        var pointSize = 0.0001;
+        var pointSize = 0.005;
         var geometryCloud = new THREE.Geometry({dynamic:true});
-        var geometryMesh = new THREE.Geometry({dynamic:true});
         var material = new THREE.PointCloudMaterial({size:pointSize, vertexColors:true});
 
         var pointcloudLoaded = false;
-        var useMesh = false;
+	var useLabelColors = false;
+	var labelColorsPresent = false;
         var pcColors = [];
-        var meshColors = [];
+	var pcColorsLabel2 = [];
         var min_x = 0, min_y = 0, min_z = 0, max_x = 0, max_y = 0, max_z = 0, freq = 0;
 
-        // Load the mesh vertices
-        Papa.parse("<?php echo $meshVerticesUrl ?>", {
-          download: true,
-          worker: true,
-          step: function(row) {
-            var line = row.data[0];
-            if (line.length != 3) return;
-
-            // Vertices
-            var x = parseFloat(line[0]);
-            var y = parseFloat(line[1]);
-            var z = parseFloat(line[2]);
-            if(x>max_x) max_x = x;
-            if(x<min_x) min_x = x;
-            if(y>max_y) max_y = y;
-            if(y<min_y) min_y = y;
-            if(z>max_z) max_z = z;
-            if(z<min_z) min_z = z;
-            geometryMesh.vertices.push(new THREE.Vector3(x, y, z));
-            
-            // Color
-            meshColors.push(new THREE.Color('rgb(255,255,255)'));
-            geometryMesh.colors = meshColors;
-
-          }
-        });
-        
-        // Load the mesh faces
-        Papa.parse("<?php echo $meshFacesUrl ?>", {
-          download: true,
-          worker: true,
-          step: function(row) {
-            var line = row.data[0];
-            if (line.length != 3) return;
-
-            // Faces
-            geometryMesh.faces.push(new THREE.Face3(line[0], line[1], line[2]));
-
-          }
-        });
         
         // Load the pointcloud
         Papa.parse("<?php echo $pcUrl ?>", {
@@ -214,7 +167,7 @@ else {
 
             freq++;
             if (freq > 2000) {
-              var per = Math.round((geometryCloud.vertices.length + geometryMesh.vertices.length) * 100 / (<?php echo $lineCountCloud ?> + <?php echo $lineCountMesh ?>));
+              var per = Math.round((geometryCloud.vertices.length) * 100 / (<?php echo $lineCountCloud ?> ));
               $("#progressbar").attr("aria-valuenow", per);
               $("#progressbar").css("width", per + "%");
               $("#progressbar").text(per + "%");
@@ -223,7 +176,6 @@ else {
           },
           complete: function() {
             console.log("Pointcloud with " + geometryCloud.vertices.length + " points loaded.");
-            console.log("Mesh with " + geometryMesh.vertices.length + " vertices loaded.");
 
             // Build the scene
             geometryCloud.colors = pcColors;
@@ -287,7 +239,7 @@ else {
         
         // Changes the representation style
         function changeRepresentation() {
-            useMesh = !useMesh;
+            useLabelColors = !useLabelColors;
         }
 
         // Zoom on wheel
@@ -333,13 +285,11 @@ else {
 
             // Re-render the scene
             material = new THREE.PointCloudMaterial({ size: pointSize, opacity: 0.8, vertexColors: true });
-            var meshMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, vertexcolors: 0xffffff, wireframe: true });
             var pointcloud = new THREE.PointCloud(geometryCloud, material);
-            var mesh = new THREE.Mesh(geometryMesh, meshMaterial);
             scene = new THREE.Scene();
             scene.fog = new THREE.FogExp2(0x000000, 0.0009);
-            if(useMesh) {
-                scene.add(mesh);
+            if(useLabelColors) {
+                scene.add(pointcloud_labeled);
             } else {
                 scene.add(pointcloud);
             }
@@ -360,8 +310,10 @@ else {
       <div id="controls-browser" style="position:absolute; top:5px; left:5px; z-index:999999; display:none;">
         <a class="btn btn-sm btn-default" href="../home">back</a>
         <p style="color:#aaa; margin-top:5px; font-size:12px;">
-          - space: change between point cloud/mesh representation<br />
-          - +/-: change point size
+          - space: switch on and off point cloud color information<br />
+          - +/- or &#8679 (arrow up) / &#8681 (arrow down): change point size<br/>
+          - left/right mouse button: pan and move object <br/>
+          - scroll mouse: zoom in and out object
         </p>
       </div>
       <div id="controls-iframe" style="position:absolute; top:5px; left:5px; z-index:999999; display:none;">
