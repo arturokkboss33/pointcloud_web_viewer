@@ -15,8 +15,6 @@ define("DATAFOLDER", "data");
 define("PCFILE", "pc.csv");
 define("PCINFO", "info.csv");
 define("PCIMG", "img.png");
-define("MESHVERTICESFILE", "mesh_vertices.csv");
-define("MESHFACESFILE", "mesh_faces.csv");
 
 // Can be development or production
 define("ENVIRONMENT", "production");
