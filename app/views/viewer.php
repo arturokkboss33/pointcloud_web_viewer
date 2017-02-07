@@ -5,12 +5,16 @@ $valid = true;
 $pcDataFolder = DATAFOLDER . '/' . $pcFolder;
 $pcFile = $pcDataFolder . '/' . PCFILE;
 $infoFile = $pcDataFolder . '/' . PCINFO;
+
+console.log("Pointcloud with " + $infoFile + " points loaded." + $pcDataFolder);
+
 if (!is_dir($pcDataFolder)) {
   $valid = false;
 }
 if (!file_exists($pcFile) || !file_exists($infoFile)) {
   $valid = false;
 }
+
 if (!$valid) {
   header("Location: ../404");
   die();
@@ -29,7 +33,9 @@ $lineCountCloud--;
 
 // Pointcloud url
 if (ENVIRONMENT === 'production') {
+
   $pcUrl = PRODURL . $pcFile;
+
 }
 else {
   $pcUrl = DEVELURL . $pcFile;
@@ -92,8 +98,13 @@ else {
         var scene = new THREE.Scene();
 
         // Camera
-        var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 300);
+        var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 300);
+	//var camera  = new THREE.OrthographicCamera( window.innerWidth , window.innerWidth , window.innderHeight, window,innerHeight, 1, 1000 );
         camera.position.z = -1;
+        //camera.rotateOnAxis(new THREE.Vector3(1, 0, 0), 3.14);
+	//camera.rotation.set(100.0, 0.4, 3.14 ,"XYZ");
+	//camera.rotation.x = camera.rotation.x + 1.57;
+        //camera.updateProjectionMatrix();
 
         // Detect webgl support
         if (!Detector.webgl) {
@@ -108,6 +119,9 @@ else {
 
         // Render the scene
         function render() {
+
+          //camera.rotation.x = camera.rotation.x + 1.57;
+
           renderer.render(scene, camera);
         }
 
@@ -132,23 +146,26 @@ else {
         // Init the geometry
         var pointSize = 0.005;
         var geometryCloud = new THREE.Geometry({dynamic:true});
+        var geometryCloudLabeled2= new THREE.Geometry({dynamic:true});
         var material = new THREE.PointCloudMaterial({size:pointSize, vertexColors:true});
 
         var pointcloudLoaded = false;
-	var useLabelColors = false;
-	var labelColorsPresent = false;
+        var useLabelColors = false;
+        var labelColorsPresent = false;
         var pcColors = [];
-	var pcColorsLabel2 = [];
+        var pcColorLabels2 = [];
+
         var min_x = 0, min_y = 0, min_z = 0, max_x = 0, max_y = 0, max_z = 0, freq = 0;
 
-        
+      
         // Load the pointcloud
         Papa.parse("<?php echo $pcUrl ?>", {
           download: true,
           worker: true,
           step: function(row) {
             var line = row.data[0];
-            if (line.length != 6) return;
+            if (line.length == 0) return;
+            if (line.length > 9) return;
 
             // Point
             var x = parseFloat(line[0]);
@@ -161,13 +178,17 @@ else {
             if(z>max_z) max_z = z;
             if(z<min_z) min_z = z;
             geometryCloud.vertices.push(new THREE.Vector3(x, y, z));
+            geometryCloudLabeled2.vertices.push(new THREE.Vector3(x, y, z));
 
             // Color
             pcColors.push(new THREE.Color('rgb(' + line[3] + ',' + line[4] + ',' + line[5] + ')'));
+	    labelColorsPresent = true;
+	    pcColorLabels2.push(new THREE.Color('rgb(' + line[6] + ',' + line[7] + ',' + line[8] + ')'));
+
 
             freq++;
             if (freq > 2000) {
-              var per = Math.round((geometryCloud.vertices.length) * 100 / (<?php echo $lineCountCloud ?> ));
+              var per = Math.round((geometryCloud.vertices.length) * 100 / (<?php echo $lineCountCloud ?>));
               $("#progressbar").attr("aria-valuenow", per);
               $("#progressbar").css("width", per + "%");
               $("#progressbar").text(per + "%");
@@ -178,9 +199,18 @@ else {
             console.log("Pointcloud with " + geometryCloud.vertices.length + " points loaded.");
 
             // Build the scene
-            geometryCloud.colors = pcColors;
-            var pointcloud = new THREE.PointCloud(geometryCloud, material);
+	    var pointcloud 
+            var pointcloud_labeled2	    
+	    	    	
+            geometryCloudLabeled2.colors = pcColorLabels2;  
+	    pointcloud_labeled2 = new THREE.PointCloud(geometryCloudLabeled2, material);
+	    
+	    geometryCloud.colors = pcColors;
+	    pointcloud = new THREE.PointCloud(geometryCloud, material);
+	    
             //scene.fog = new THREE.FogExp2(0x000000, 0.0009);
+
+
             scene.add(pointcloud);
 
             // Remove the progressbar
@@ -264,17 +294,17 @@ else {
         function onKeyDown(evt) {
           if (pointcloudLoaded) {
             // Increase/decrease point size
-            if (evt.keyCode == 189 || evt.keyCode == 109) {
-              pointSize -= 0.001;
+            if (evt.keyCode == 189 || evt.keyCode == 109 || evt.keyCode == 40) {
+              pointSize -= 0.005;
             }
-            if (evt.keyCode == 187 || evt.keyCode == 107) {
-              pointSize += 0.001;
+            if (evt.keyCode == 187 || evt.keyCode == 107 || evt.keyCode == 38) {
+              pointSize += 0.005;
             }
             if(pointSize < 0.0001) {
                 pointSize = 0.0001;
             }
-            if(pointSize > 0.01) {
-                pointSize = 0.01;
+            if(pointSize > 0.05) {
+                pointSize = 0.05;
             }
 
             if (evt.keyCode == 32) changeRepresentation();
@@ -286,6 +316,7 @@ else {
             // Re-render the scene
             material = new THREE.PointCloudMaterial({ size: pointSize, opacity: 0.8, vertexColors: true });
             var pointcloud = new THREE.PointCloud(geometryCloud, material);
+            var pointcloud_labeled = new THREE.PointCloud(geometryCloudLabeled2, material);
             scene = new THREE.Scene();
             scene.fog = new THREE.FogExp2(0x000000, 0.0009);
             if(useLabelColors) {
@@ -317,7 +348,7 @@ else {
         </p>
       </div>
       <div id="controls-iframe" style="position:absolute; top:5px; left:5px; z-index:999999; display:none;">
-        <a style="font-size:11px;" href="http://www.robotics.jacobs-university.de/datasets/2017-underwater-stereo-dataset-v01/view/<?php echo $pcFolder ?>" target="_blank">view on robotics.jacobs-university.de</a>
+        <a style="font-size:11px;" href="http://www.robotics.jacobs-university.de/pointclouds/view/<?php echo $pcFolder ?>" target="_blank">view on robotics.jacobs-university.de</a>
       </div>
 
       <div id="progressbar-container" class="progress progress-striped" style="position:absolute; z-index:999999; width:400px; top:230px;">
