@@ -40,7 +40,7 @@
   <div class="row">
 
     <div class="col-lg-8">
-      <h1 style="font-size:38px;">EU FP7 CADDY<br>Underwater Stereo Images Dataset</h1><br />
+      <h1 style="font-size:38px;">EU-FP7 CADDY<br>Underwater Stereo Images Dataset</h1><br />
       <p class="lead">Stereo images and generated point clouds of divers' poses hand gestures in different underwater scenarios.</p>
 
       <p class="justify">
@@ -50,9 +50,8 @@
       <br>
 
       <h2 style="font-size:24px">Diver body pose estimation</h2>
-      <br>
-      Describe dataset here.
-
+      The AUV (Autonomous Underwater Vehicle) needs to face the diver from the front in order to communicate with him/her through a tablet attached to the AUV's front. It is also the optimal position to monitor the diver's behavior and overall-well being e.g. breathign pattern, equipment position, etc. 
+      To keep the AUV in front of the diver at all times, the diver wears a system of inertial sensors in his suit that transmit his pose acoustically (<a href="http://ieeexplore.ieee.org/document/7133640/" target="_blank">[1]</a>). However, acoustic communication's bandwith and tranmission rate (~5s) prevents the system from having this information in real time. For this reason, diver pose estimation methods based on stereo images were developed [2] and this database was created. 
       </p>  
     </div>
     
