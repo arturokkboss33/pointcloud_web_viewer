@@ -54,7 +54,7 @@ else {
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <style>
-      body {margin:0; padding:0; background-color:white}
+      body {margin:0; padding:0; background-color:black}
       canvas {width:100%; height:100%;}
     </style>
   </head>
@@ -100,7 +100,7 @@ else {
         // Camera
         var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 300);
 	//var camera  = new THREE.OrthographicCamera( window.innerWidth , window.innerWidth , window.innderHeight, window,innerHeight, 1, 1000 );
-        camera.position.z = -1;
+        camera.position.z = -1.5;
         //camera.rotateOnAxis(new THREE.Vector3(1, 0, 0), 3.14);
 	//camera.rotation.set(100.0, 0.4, 3.14 ,"XYZ");
 	//camera.rotation.x = camera.rotation.x + 1.57;
@@ -144,7 +144,7 @@ else {
         }
 
         // Init the geometry
-        var pointSize = 0.005;
+        var pointSize = 0.025;
         var geometryCloud = new THREE.Geometry({dynamic:true});
         var geometryCloudLabeled2= new THREE.Geometry({dynamic:true});
         var material = new THREE.PointCloudMaterial({size:pointSize, vertexColors:true});
