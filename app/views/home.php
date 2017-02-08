@@ -40,15 +40,18 @@
   <div class="row">
 
     <div class="col-lg-8">
-      <h1 style="font-size:38px;">CADDY Underwater Stereo Images Dataset</h1><br />
-      <p class="lead">Stereo images and generated point clouds of divers' hand gestures and poses in different underwater scenarios.</p>
+      <h1 style="font-size:38px;">EU FP7 CADDY<br>Underwater Stereo Images Dataset</h1><br />
+      <p class="lead">Stereo images and generated point clouds of divers' poses hand gestures in different underwater scenarios.</p>
 
       <p class="justify">
+
       <br>
-	The images available were collected with a Bumblebee XB3 FireWire Stereo Vision System during different research trials carried out within the  <a href="http://caddy-fp7.eu/" target="_blank">EU-FP7 CADDY</a> project (Cognitive Autonomous Diving Buddy). With the creation of this dataset, research in two specific areas was made: diver <b>body pose estimation</b> and <b>hand gesture recognition</b>.
-     <p class="refhighlightbox"><b>Diver pose estimation</b> <br> s<br>for Applications with Untrained End-Users" <br> In <i>Robotics and Autonomous Systems</i>, April 2015</p>
-   
+      The images available were collected with a Bumblebee XB3 FireWire Stereo Vision System during different research trials carried out within the  <a href="http://caddy-fp7.eu/" target="_blank">EU-FP7 CADDY</a> project (Cognitive Autonomous Diving Buddy). With the creation of this dataset, research in two specific areas was made: <b>diver body pose estimation</b> and <b>hand gesture recognition</b>.
       <br>
+
+      <h2 style="font-size:24px">Diver body pose estimation</h2>
+      <br>
+      Describe dataset here.
 
       </p>  
     </div>
