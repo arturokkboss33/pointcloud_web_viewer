@@ -54,7 +54,10 @@
       The AUV (Autonomous Underwater Vehicle) needs to face the diver from the front in order to communicate with him/her through a tablet attached to the AUV's front. It is also the optimal position to monitor the diver's behavior and overall-well being e.g. breathign pattern, equipment position, etc.
       </p> 
       <p class="justify">
-      To keep the AUV in front of the diver at all times, the diver wears a system of inertial sensors in his suit that transmit his pose acoustically <a href="http://ieeexplore.ieee.org/document/7133640/" target="_blank">[1]</a>. However, acoustic communication's bandwith and tranmission rate (~5s) prevents the system from having this information in real time. For this reason, diver pose estimation methods based on stereo images were developed [2] and this database was created. 
+      To keep the AUV in front of the diver at all times, the diver wears a system of inertial sensors in his suit that transmits his pose acoustically (DiverNet) <a href="http://ieeexplore.ieee.org/document/7133640/" target="_blank">[1]</a>. However, acoustic communication's bandwith and tranmission rate (~5s) prevents the system from having this information in real time. For this reason, diver pose estimation methods based on stereo images were developed [2] and this database was created. 
+      </p>
+      <p class="justify">
+      To collect data divers were asked to perform three tasks in front of the AUV: turn 360° horizontally (chest pointing downwards) and vertically, clockwise and anticlockwise, and swim freely. For this last task, the AUV was operated manually to follow the diver. Ground thruth is provided by the inertial sensor located in the diver's chest, which logs the data to an underwater tablet directly hook to the DiverNet or to an on-land computer through an otic fiber cable.         
       </p>  
 
 
