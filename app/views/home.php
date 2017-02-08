@@ -53,6 +53,13 @@
 
     </div>
 
+  <div class="col-lg-2 col-lg-offset-2">
+      <div style="width:100%; height: 20px;"></div>
+      <a title="Jacobs Robotics" href="http://robotics.jacobs-university.de"><img class="img-responsive" src="img/logo.png" width="250"></a>
+      </div>
+
+  </div>
+
 
   <!-- Showcase -->
   <div class="row">
@@ -171,13 +178,6 @@
       </p>
 
     </div>
-    
-    <div class="col-lg-2 col-lg-offset-2">
-      <div style="width:100%; height: 20px;"></div>
-      <a title="Jacobs Robotics" href="http://robotics.jacobs-university.de"><img class="img-responsive" src="img/logo.png" width="250"></a>
-    </div>
-
-  </div>
 
  
 
