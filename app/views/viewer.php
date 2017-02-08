@@ -120,7 +120,7 @@ else {
         // Render the scene
         function render() {
 
-          //camera.rotation.x = camera.rotation.x + 1.57;
+          camera.rotation.z = camera.rotation.z + 1.57;
 
           renderer.render(scene, camera);
         }
