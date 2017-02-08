@@ -100,7 +100,7 @@ else {
         // Camera
         var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 300);
 	//var camera  = new THREE.OrthographicCamera( window.innerWidth , window.innerWidth , window.innderHeight, window,innerHeight, 1, 1000 );
-        camera.position.z = -2.0;
+        camera.position.z = -2.5;
         //camera.rotateOnAxis(new THREE.Vector3(1, 0, 0), 3.14);
 	//camera.rotation.set(100.0, 0.4, 3.14 ,"XYZ");
 	//camera.rotation.x = camera.rotation.x + 1.57;
