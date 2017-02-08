@@ -54,7 +54,7 @@ else {
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <style>
-      body {margin:0; padding:0; background-color:black}
+      body {margin:0; padding:0; background-color:white}
       canvas {width:100%; height:100%;}
     </style>
   </head>
